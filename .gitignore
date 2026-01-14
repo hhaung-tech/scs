@@ -1,0 +1,38 @@
+# System files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Logs
+*.log
+error_log
+access_log
+
+# Temporary files
+*.tmp
+*.temp
+
+# Cache files
+cache/
+tmp/
+
+# Environment files (if you add them later)
+.env
+.env.local
+.env.production
+config/env.php
+
+# Backup files
+*.bak
+*.backup
+*~

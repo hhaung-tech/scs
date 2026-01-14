@@ -1,0 +1,265 @@
+/* Styles exclusively for the Student Survey */
+
+.survey-container {
+  padding-top: 100px;
+  max-width: 900px;
+  margin: 0 auto;
+  padding-bottom: 50px;
+}
+
+.survey-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.survey-header h1 {
+  color: #2a2c39;
+  font-family: "Poppins", sans-serif;
+  font-size: 32px;
+  margin-bottom: 20px;
+}
+
+/* Tab Navigation Styles */
+#surveyTab {
+  border-bottom: 1px solid #dee2e6;
+  margin-bottom: 20px;
+}
+
+#surveyTab .nav-item {
+  margin-bottom: -1px;
+}
+
+#surveyTab .nav-link {
+  border: 1px solid transparent;
+  border-top-left-radius: 0.25rem;
+  border-top-right-radius: 0.25rem;
+  color: #495057;
+  padding: 0.5rem 1rem;
+}
+
+#surveyTab .nav-link:hover,
+#surveyTab .nav-link:focus {
+  border-color: #e9ecef #e9ecef #dee2e6;
+}
+
+#surveyTab .nav-link.active {
+  color: #495057;
+  background-color: #fff;
+  border-color: #dee2e6 #dee2e6 #fff;
+}
+
+/* Tab Content Styles */
+.nav-tabs > li.active > a,
+.nav-tabs > li.active > a:focus,
+.nav-tabs > li.active > a:hover {
+  color: #555;
+  cursor: default;
+  background-color: #ddb41f;
+  border: 1px solid #ddd;
+  border-bottom-color: transparent;
+}
+.tab-content > .tab-pane {
+  display: none;
+}
+
+.tab-content > .active {
+  display: block;
+}
+
+.category-section {
+  background: #fff;
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.08);
+  margin-bottom: 30px;
+}
+
+.category-section h2 {
+  color: #4c5587;
+  font-size: 24px;
+  margin-bottom: 25px;
+  padding-bottom: 15px;
+  border-bottom: 2px solid #f0f0f0;
+}
+
+/* Styles for each question block */
+.question-item {
+  background: #f8f9fa;
+  padding: 25px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+  transition: transform 0.2s;
+  border: 2px solid transparent; /* Added base border */
+}
+.question-item p strong {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.question-item:hover {
+  transform: translateY(-2px);
+}
+
+.question-item p {
+  font-size: 16px;
+  line-height: 1.6;
+  margin-bottom: 20px;
+  color: #2a2c39;
+}
+
+/* --- Styles for Bootstrap form-check elements (Add more specific styles if needed) --- */
+/* Example: Add some margin between inline radio buttons if desired */
+.form-check-inline {
+  margin-right: 1rem; /* Adjust as needed */
+}
+
+/* Add custom focus styles maybe? Bootstrap default might be sufficient */
+.form-check-input:focus {
+  /* box-shadow: 0 0 0 3px rgba(221, 180, 31, 0.3); /* Example focus similar to old one */
+  /* border-color: #ddb41f; */ /* Example focus */
+}
+
+/* --- Error Styling --- */
+.question-item.error {
+  border-color: #ff4444;
+  background: #fff5f5;
+}
+
+.error-message {
+  /* General error message style if used outside question-item */
+  color: #ff4444;
+  font-size: 14px;
+  margin-top: 8px;
+  display: none; /* Hide by default */
+}
+
+.question-item.error .error-message {
+  /* Show error message within an error-marked question item */
+  display: block;
+  /* Consider adding shake animation if desired, copy from survey.css */
+}
+/* Keyframes for shake animation (copy if needed) */
+/*
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-10px); }
+  75% { transform: translateX(10px); }
+}
+.question-item.error {
+  animation: shake 0.5s;
+}
+*/
+
+/* --- Progress Bar --- */
+.progress-container {
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  margin-bottom: 30px;
+}
+
+.progress-bar {
+  height: 8px;
+  background: #e9ecef; /* Bootstrap's default light grey */
+  border-radius: 4px;
+  overflow: hidden;
+  margin: 10px 0;
+}
+
+.progress {
+  height: 100%;
+  background: #ffc107; /* Keep the yellow progress */
+  transition: width 0.3s ease;
+  display: flex; /* Added for Bootstrap 5 progress */
+  flex-direction: column; /* Added for Bootstrap 5 progress */
+  justify-content: center; /* Added for Bootstrap 5 progress */
+  color: white; /* Added for Bootstrap 5 progress */
+  text-align: center; /* Added for Bootstrap 5 progress */
+  white-space: nowrap; /* Added for Bootstrap 5 progress */
+}
+
+/* --- Navigation --- */
+.section-navigation {
+  text-align: center;
+  color: #666;
+  font-size: 14px;
+  margin-top: 10px;
+}
+
+.navigation-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 30px;
+}
+
+/* Style buttons using Bootstrap classes (.btn, .btn-primary, .btn-secondary) is recommended,
+   but keeping custom styles for now */
+.navigation-buttons button {
+  padding: 12px 30px;
+  border: none;
+  border-radius: 25px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+#prevButton {
+  background: #f0f0f0;
+  color: #666;
+}
+
+#nextButton {
+  background: #4c5587; /* Consider using Bootstrap's btn-primary color */
+  color: white;
+}
+
+#submitButton {
+  background: #2a2c39; /* Consider using Bootstrap's btn-success or btn-dark */
+  color: white;
+}
+
+.navigation-buttons button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* --- Other Form Elements (if applicable) --- */
+select,
+textarea {
+  width: 100%;
+  padding: 12px;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 15px;
+  transition: all 0.3s ease;
+  margin-bottom: 15px; /* Added margin */
+}
+
+select:focus,
+textarea:focus {
+  border-color: #ddb41f;
+  outline: none;
+}
+
+/* --- Responsive --- */
+@media (max-width: 768px) {
+  /* Adjust form-check layout if needed on smaller screens */
+  .form-check-inline {
+    /* Maybe stack them? display: block; margin-bottom: 0.5rem; */
+  }
+
+  .navigation-buttons {
+    flex-direction: column;
+  }
+
+  .navigation-buttons button {
+    width: 100%;
+  }
+
+  .survey-container {
+    padding: 80px 15px 30px;
+  }
+}
