@@ -1,40 +1,47 @@
 <?php
 require_once '../config/database.php';
-require_once '../includes/auth.php';
 
 $message = '';
 $error = '';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $email = $_POST['email'];
+    $email = trim($_POST['email']);
     
     try {
-        // Check if email exists in users table instead of admin_users
-        $stmt = $conn->prepare("SELECT id FROM users WHERE email = :email");
-        $stmt->bindParam(':email', $email);
-        $stmt->execute();
+        // Check if email exists in admin_users table
+        $stmt = $pdo->prepare("SELECT id, email, first_name, last_name FROM admin_users WHERE email = ?");
+        $stmt->execute([$email]);
+        $user = $stmt->fetch();
         
-        if ($stmt->rowCount() > 0) {
+        if ($user) {
             // Generate reset token
             $token = bin2hex(random_bytes(32));
             $expiry = date('Y-m-d H:i:s', strtotime('+1 hour'));
             
-            // Update the users table with reset token
-            $updateStmt = $conn->prepare("
-                UPDATE users 
-                SET reset_token = :token, 
-                    reset_token_expiry = :expiry 
-                WHERE email = :email
-            ");
+            // First, add reset token columns if they don't exist
+            try {
+                $pdo->exec("ALTER TABLE admin_users ADD COLUMN IF NOT EXISTS reset_token VARCHAR(64)");
+                $pdo->exec("ALTER TABLE admin_users ADD COLUMN IF NOT EXISTS reset_token_expiry TIMESTAMP");
+            } catch (PDOException $e) {
+                // Columns might already exist, continue
+            }
             
-            $updateStmt->bindParam(':token', $token);
-            $updateStmt->bindParam(':expiry', $expiry);
-            $updateStmt->bindParam(':email', $email);
-            $result = $updateStmt->execute();
+            // Update the admin_users table with reset token
+            $updateStmt = $pdo->prepare("
+                UPDATE admin_users 
+                SET reset_token = ?, reset_token_expiry = ? 
+                WHERE email = ?
+            ");
+            $result = $updateStmt->execute([$token, $expiry, $email]);
             
             if ($result) {
-                $resetLink = "http://{$_SERVER['HTTP_HOST']}/scs.isyedu.org/admin/reset-password.php?token=" . $token;
-                $message = "If an account exists with this email, password reset instructions will be sent.";
+                $resetLink = "http://{$_SERVER['HTTP_HOST']}/isy_scs_ai/admin/reset-password.php?token=" . $token;
+                
+                // In a real application, you would send an email here
+                // For now, we'll just show the reset link for testing
+                $message = "Password reset link generated. In production, this would be sent via email.<br><br>";
+                $message .= "For testing purposes, here's your reset link:<br>";
+                $message .= "<a href='{$resetLink}' target='_blank'>Reset Password</a>";
             } else {
                 $error = "An error occurred. Please try again later.";
             }
@@ -82,4 +89,4 @@ require_once '../includes/footer.php';
     </form>
 </div>
 
-<<?php require_once '../includes/footer.php'; ?>
+<?php require_once '../includes/footer.php'; ?>

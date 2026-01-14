@@ -16,7 +16,7 @@ function basePath($path = '') {
     <meta name="author" content="">
 
     <title>School Climate Survey</title>
-    <link rel="icon" type="image/x-icon" href="isy_scs_ai/isy_scs_ai/assets/images/isy_logo.png">
+    <link rel="icon" type="image/x-icon" href="<?php echo basePath('assets/images/isy_logo.png'); ?>">
     <link rel="stylesheet" href="/isy_scs_ai/assets/styles/style.min.css">
     <!-- Main Styles -->
     <!-- mCustomScrollbar -->
@@ -39,6 +39,11 @@ function basePath($path = '') {
     <link rel="stylesheet" href="/isy_scs_ai/assets/plugin/fullcalendar/fullcalendar.print.css" media="print" />
     <!-- Dark Themes -->
     <link rel="stylesheet" href="/isy_scs_ai/assets/styles/style-dark.min.css" />
+    <?php
+    if (isset($_SERVER['REQUEST_URI']) && strpos($_SERVER['REQUEST_URI'], '/admin/') !== false) {
+        echo '<link rel="stylesheet" href="' . basePath('assets/styles/isy-admin-theme.css') . '" />';
+    }
+    ?>
     <?php
     // Conditionally load survey CSS based on the current page
     if (isset($currentPage) && $currentPage === 'student-survey') {

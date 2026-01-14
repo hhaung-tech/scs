@@ -2,7 +2,11 @@
 session_start();
 require_once '../config/database.php';
 require_once '../includes/auth.php';
+require_once '../includes/survey-helper.php';
 requireLogin();
+
+// Get active survey types for dropdown
+$activeSurveyTypes = getActiveSurveyTypes($pdo);
 
 $message = '';
 $error = '';
@@ -58,7 +62,7 @@ $codes = $stmt->fetchAll();
 ?>
 
 <?php require_once '../includes/header.php'; ?>
-<?php require_once '../includes/sidebar.php'; ?>
+<?php require_once '../includes/sidebar-dynamic.php'; ?>
 <div id="wrapper">
     <div class="main-content">
         <div class="row small-spacing">

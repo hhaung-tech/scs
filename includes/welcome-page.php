@@ -11,7 +11,7 @@
     <div class="services-section">
         <div class="container">
             <div class="text-center mb-4">
-                <img src="/../assets/images/isy_logo.png" alt="ISY Logo" class="logo-img">
+                <img src="/isy_scs_ai/assets/images/isy_logo.png" alt="ISY Logo" class="logo-img">
                 <h2 class="section-title">ISY School Climate Survey</h2>
             </div>
             <p class="section-description">Help us create a better learning environment by participating in our<strong> anonymous school climate survey</strong>.</p>

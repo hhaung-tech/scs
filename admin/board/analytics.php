@@ -5,8 +5,8 @@ require_once '../../includes/analytics-common.php';
 requireLogin();
 
 // Set page configuration
-$currentPage = 'guardian-analytics';
-$surveyType = 'guardian';
+$currentPage = 'board-analytics';
+$surveyType = 'board';
 
 // Initialize variables
 $statistics = [];
@@ -48,6 +48,5 @@ try {
 }
 
 require_once '../../includes/analytics-template.php';
-require_once '../../includes/footer.php'; 
+require_once '../../includes/footer.php';
 ?>
-

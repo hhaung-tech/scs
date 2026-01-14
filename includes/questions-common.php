@@ -5,8 +5,6 @@ if (strpos($currentPath, '/admin/guardian/') !== false) {
     $surveyType = 'Guardian Survey Questions';
 } elseif (strpos($currentPath, '/admin/student/') !== false) {
     $surveyType = 'Student Survey Questions';
-} elseif (strpos($currentPath, '/admin/old-student/') !== false) {
-    $surveyType = 'Complex Student Survey Questions';
 } elseif (strpos($currentPath, '/admin/staff/') !== false) {
     $surveyType = 'Staff Survey Questions';
 }elseif (strpos($currentPath, '/admin/alumni/') !== false) {
@@ -23,8 +21,6 @@ if (strpos($currentPath, '/admin/guardian/') !== false) {
     $type = 'staff';
 } elseif (strpos($currentPath, '/admin/student/') !== false) {
     $type = 'student';
-} elseif (strpos($currentPath, '/admin/old-student/') !== false) {
-    $type = 'old-student';
 } elseif (strpos($currentPath, '/admin/alumni/') !== false) {  
     $type = 'alumni';
 }elseif (strpos($currentPath, '/admin/board/') !== false) {
@@ -77,8 +73,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             $type = 'staff';  
                         } elseif (strpos($currentPath, '/admin/student/') !== false) {
                             $type = 'student';
-                        } elseif (strpos($currentPath, '/admin/old-student/') !== false) {
-                            $type = 'old-student';
                         }elseif (strpos($currentPath, '/admin/alumni/') !== false) {
                             $type = 'alumni';
                         }elseif (strpos($currentPath, '/admin/board/') !== false) {
@@ -88,6 +82,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         try {
                             $stmt->execute([$_POST['category_name'], $type]);
                             $message = "Category added successfully!";
+                            // Redirect to prevent form resubmission
+                            header('Location: ' . $_SERVER['PHP_SELF'] . '?success=1');
+                            exit;
                         } catch (PDOException $e) {
                             error_log("Full error: " . $e->getMessage());
                             $error = "Database error: " . $e->getMessage();
@@ -292,7 +289,7 @@ foreach ($categories as $categoryId => $categoryData) {
 
 
 require_once '../../includes/header.php';
-require_once '../../includes/sidebar.php';
+require_once '../../includes/sidebar-dynamic.php';
 ?>
 <div class="wrapper">
 <div class="main-content">
@@ -313,28 +310,35 @@ require_once '../../includes/sidebar.php';
             </div>
         <?php endif; ?>
 
-        <!-- Add Category Form -->
+        <!-- Section Management -->
         <div class="col-xs-12">
             <div class="box-content card white">
                 <h4 class="box-title"><?php echo htmlspecialchars($surveyType); ?></h4>
                 <div class="card-content">
-                    <form method="POST" class="category-form">
-                        <input type="hidden" name="action" value="add_category">
-                        <div class="input-group margin-bottom-20">
-                            <input type="text" name="category_name" class="form-control" required 
-                                   placeholder="Enter new section name">
-                            <div class="input-group-btn">
-                                <button type="submit" class="btn btn-success waves-effect waves-light">
-                                    <i class="fa fa-plus"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </form>
+                    <div class="alert alert-info">
+                        <i class="fa fa-info-circle"></i> 
+                        Manage sections and questions using the <strong>Question Manager</strong>.
+                        <a href="/isy_scs_ai/admin/manage-questions-modern.php" class="btn btn-sm btn-primary pull-right">
+                            <i class="fa fa-list"></i> Open Question Manager
+                        </a>
+                        <div class="clearfix"></div>
+                    </div>
                 </div>
             </div>
         </div>
         
         <!-- Categories and Questions -->
+        <?php if (count($categories) === 0): ?>
+        <div class="col-xs-12">
+            <div class="box-content card white">
+                <div class="card-content text-center" style="padding: 40px;">
+                    <i class="fa fa-folder-open" style="font-size: 48px; color: #ccc; margin-bottom: 20px;"></i>
+                    <h4>No sections created yet</h4>
+                    <p class="text-muted">Use the form above to create your first section for this survey.</p>
+                </div>
+            </div>
+        </div>
+        <?php else: ?>
         <?php foreach ($categories as $categoryId => $category): ?>
         <div class="col-xs-12">
             <div class="box-content card white category-section">
@@ -511,6 +515,7 @@ require_once '../../includes/sidebar.php';
             </div>
         </div>
         <?php endforeach; ?>
+        <?php endif; ?>
     </div>
 </div>
 </div>

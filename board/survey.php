@@ -2,6 +2,10 @@
 session_start();
 require_once '../config/database.php';
 require_once '../includes/survey-common.php';
+require_once '../includes/survey-helper.php';
+
+// Validate that board survey is active
+validateSurveyAccess($pdo, 'board');
 
 $message = '';
 $error = '';
@@ -53,7 +57,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['answers'])) {
         handleSurveySubmission($pdo, $_POST['answers']);
         unset($_SESSION['survey_code']);
         unset($_SESSION['authenticated_board']);
-        header("Location: /../thank-you.php");
+        header("Location: /isy_scs_ai/thank-you.php");
         exit;
     } catch (Exception $e) {
         http_response_code(500);
@@ -117,8 +121,8 @@ if (empty($_SESSION['csrf_token'])) {
                                 case 'likert_scale': ?>
                                     <div class="likert-scale">
                                         <?php 
-                                        $scaleOptions = json_decode($question['options'], true);
-                                        if ($scaleOptions) {
+                                        $scaleOptions = parseQuestionOptions($question['options']);
+                                        if (!empty($scaleOptions)) {
                                             foreach ($scaleOptions as $index => $optionText): ?>
                                                 <div class="scale-option">
                                                     <input type="radio" 
@@ -142,7 +146,7 @@ if (empty($_SESSION['csrf_token'])) {
                                 <?php case 'drop_down': ?>
                                     <select name="answers[<?php echo $question['id']; ?>]" required>
                                         <option value="">Select an option</option>
-                                        <?php foreach (explode(',', $question['options']) as $option): ?>
+                                        <?php foreach (parseQuestionOptions($question['options']) as $option): ?>
                                             <option value="<?php echo htmlspecialchars(trim($option)); ?>">
                                                 <?php echo htmlspecialchars(trim($option)); ?>
                                             </option>
@@ -151,7 +155,7 @@ if (empty($_SESSION['csrf_token'])) {
                                     <?php break; ?>
 
                                 <?php case 'checkbox': ?>
-                                    <?php foreach (explode(',', $question['options']) as $option): ?>
+                                    <?php foreach (parseQuestionOptions($question['options']) as $option): ?>
                                         <label>
                                             <input type="checkbox" name="answers[<?php echo $question['id']; ?>][]" 
                                                    value="<?php echo htmlspecialchars(trim($option)); ?>">

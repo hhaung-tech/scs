@@ -71,18 +71,15 @@ function getTeacherAnalyticsData($pdo, $teacherId = null) {
                 q.question_text,
                 q.question_type,
                 q.options,
-                " . ($teacherId ? "t.teacher_first_name || ' ' || t.teacher_last_name as teacher_name," : "") . "
                 COUNT(DISTINCT r.id) as response_count,
                 string_agg(r.answer, '|||' ORDER BY r.answer ASC) as answers
             FROM categories c
             INNER JOIN questions q ON c.id = q.category_id
             LEFT JOIN responses r ON q.id = r.question_id
-            " . ($teacherId ? "LEFT JOIN teachers t ON r.teacher_id = t.teacher_user_dcid" : "") . "
             WHERE c.type = 'student'
             AND q.feedback_type = 'teacher'
             " . ($teacherId ? "AND r.teacher_id = :teacher_id" : "") . "
-            GROUP BY c.name, q.id, q.question_text, q.question_type, q.options" . 
-            ($teacherId ? ", teacher_name" : "") . "
+            GROUP BY c.name, q.id, q.question_text, q.question_type, q.options
             ORDER BY c.name, q.sort_order
         ");
         
@@ -209,13 +206,13 @@ function processAnalyticsData($queryResult) {
             // Get options based on question type
             if ($row['question_type'] === 'likert_scale') {
 
-                $definedOptions = json_decode($row['options'], true);
+                $definedOptions = json_decode($row['options'] ?? '', true);
                 
                 if (is_array($definedOptions)) {
                     $options = $definedOptions;
                 } else {
                     // Get the likert scale type from options
-                    $scaleType = trim($row['options']);
+                    $scaleType = trim($row['options'] ?? '');
                     switch ($scaleType) {
                         case 'agreement':
                             $options = ['Strongly Disagree', 'Disagree', 'Neutral', 'Agree', 'Strongly Agree'];

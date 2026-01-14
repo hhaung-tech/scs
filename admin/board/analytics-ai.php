@@ -41,7 +41,7 @@ try {
 
     // Include template files
     require_once '../../includes/header.php';
-    require_once '../../includes/sidebar.php';
+    require_once '../../includes/sidebar-dynamic.php';
 
 } catch (PDOException $e) {
     error_log("Database Error: " . $e->getMessage());

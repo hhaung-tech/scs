@@ -18,6 +18,57 @@ function getSurveyQuestions($pdo, $surveyType) {
     return $stmt->fetchAll();
 }
 
+function parseQuestionOptions($options) {
+    if ($options === null) {
+        return [];
+    }
+
+    $options = trim((string)$options);
+    if ($options === '') {
+        return [];
+    }
+
+    $decoded = json_decode($options, true);
+    if (json_last_error() === JSON_ERROR_NONE && is_array($decoded)) {
+        return $decoded;
+    }
+
+    $parts = preg_split('/\s*(?:,|;|\||\r\n|\r|\n)\s*/', $options);
+    $parts = array_values(array_filter(array_map('trim', $parts), function ($v) {
+        return $v !== '';
+    }));
+    return $parts;
+}
+
+function normalizeQuestionType($type) {
+    $t = strtolower(trim((string)$type));
+    if ($t === '') {
+        return 'text';
+    }
+
+    if (in_array($t, ['multiple_checkbox', 'multiple_checkboxes', 'checkboxes', 'choose_multiple', 'choose_multiple_checkbox', 'multi_checkbox'], true)) {
+        return 'checkbox';
+    }
+
+    if (in_array($t, ['dropdown', 'drop-down', 'select'], true)) {
+        return 'drop_down';
+    }
+
+    if (in_array($t, ['mcq', 'radio', 'multiple-choice'], true)) {
+        return 'multiple_choice';
+    }
+
+    if (in_array($t, ['likert', 'likertscale', 'likert-scale'], true)) {
+        return 'likert_scale';
+    }
+
+    if (in_array($t, ['textarea', 'text_response', 'free_text', 'open_ended'], true)) {
+        return 'text';
+    }
+
+    return $t;
+}
+
 function organizeSurveyData($results) {
     $categories = [];
     foreach ($results as $row) {
@@ -33,7 +84,7 @@ function organizeSurveyData($results) {
             $categories[$categoryId]['questions'][] = [
                 'id' => $row['question_id'],
                 'text' => $row['question_text'],
-                'type' => $row['question_type'] ?? 'text',
+                'type' => normalizeQuestionType($row['question_type'] ?? 'text'),
                 'options' => $row['options'],
                 'question_id' => $row['question_id']
             ];

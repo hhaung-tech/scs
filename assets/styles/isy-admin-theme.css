@@ -1,0 +1,124 @@
+:root {
+    --isy-navy: #1a365d;
+    --isy-navy-2: #0f2a4a;
+    --isy-gold: #dcb41e;
+    --isy-gold-2: #caa61b;
+    --isy-ink: #111827;
+}
+
+/* Admin theme helpers */
+.isy-text-navy { color: var(--isy-navy) !important; }
+.isy-text-gold { color: var(--isy-gold) !important; }
+
+/* Question Manager (modern) overrides */
+.modern-container {
+    background: linear-gradient(135deg, var(--isy-navy) 0%, var(--isy-navy-2) 100%) !important;
+}
+
+.section-header {
+    background: linear-gradient(135deg, var(--isy-navy) 0%, var(--isy-navy-2) 100%) !important;
+}
+
+.hero-title {
+    background: linear-gradient(135deg, var(--isy-gold) 0%, #fff3b0 100%) !important;
+    background-clip: text !important;
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+}
+
+.btn-primary-modern {
+    background: linear-gradient(135deg, var(--isy-gold) 0%, var(--isy-gold-2) 100%) !important;
+    color: var(--isy-navy) !important;
+}
+
+.btn-primary-modern:hover {
+    box-shadow: 0 10px 22px rgba(220, 180, 30, 0.35) !important;
+}
+
+.btn-warning-modern {
+    background: linear-gradient(135deg, var(--isy-navy) 0%, var(--isy-navy-2) 100%) !important;
+    color: #fff !important;
+}
+
+.add-section-form {
+    background: linear-gradient(135deg, var(--isy-gold) 0%, var(--isy-gold-2) 100%) !important;
+    color: var(--isy-navy) !important;
+    box-shadow: 0 10px 30px rgba(220, 180, 30, 0.3) !important;
+}
+
+.add-section-form input.input-modern,
+.add-section-form select.input-modern {
+    border-color: rgba(26, 54, 93, 0.2) !important;
+}
+
+.input-modern:focus {
+    border-color: var(--isy-gold) !important;
+    box-shadow: 0 0 0 4px rgba(220, 180, 30, 0.18) !important;
+}
+
+.question-card:hover {
+    border-color: var(--isy-gold) !important;
+}
+
+/* Section Manager page (create-section.php) overrides */
+.box-title i {
+    color: var(--isy-gold) !important;
+}
+
+/* Consistent admin button theme */
+.btn.btn-primary,
+.btn.btn-success,
+.btn.btn-info,
+.btn.btn-warning {
+    background-color: var(--isy-navy) !important;
+    border-color: var(--isy-navy) !important;
+    color: #fff !important;
+}
+
+.btn.btn-primary:hover,
+.btn.btn-success:hover,
+.btn.btn-info:hover,
+.btn.btn-warning:hover,
+.btn.btn-primary:focus,
+.btn.btn-success:focus,
+.btn.btn-info:focus,
+.btn.btn-warning:focus {
+    background-color: var(--isy-navy-2) !important;
+    border-color: var(--isy-navy-2) !important;
+    color: #fff !important;
+}
+
+.btn.btn-default {
+    background-color: #fff !important;
+    border-color: var(--isy-navy) !important;
+    color: var(--isy-navy) !important;
+}
+
+.btn.btn-default:hover,
+.btn.btn-default:focus {
+    background-color: #f8fafc !important;
+    border-color: var(--isy-navy-2) !important;
+    color: var(--isy-navy-2) !important;
+}
+
+.btn.btn-danger {
+    background-color: #dc2626 !important;
+    border-color: #dc2626 !important;
+    color: #fff !important;
+}
+
+.btn.btn-danger:hover,
+.btn.btn-danger:focus {
+    background-color: #b91c1c !important;
+    border-color: #b91c1c !important;
+    color: #fff !important;
+}
+
+/* Optional: make primary accents consistent */
+a {
+    color: var(--isy-navy);
+}
+
+a:hover {
+    color: var(--isy-navy-2);
+}

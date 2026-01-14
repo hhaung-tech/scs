@@ -64,7 +64,7 @@ function requireLogin() {
         header("Cache-Control: no-cache, no-store, must-revalidate");
         header("Pragma: no-cache");
         header("Expires: 0");
-        header('Location: /../admin/login.php');
+        header('Location: /isy_scs_ai/admin/login.php');
         exit;
     }
 }
@@ -82,7 +82,7 @@ function logout() {
     header("Cache-Control: no-cache, no-store, must-revalidate");
     header("Pragma: no-cache");
     header("Expires: 0");
-    header('Location: /../admin/login.php');
+    header('Location: /isy_scs_ai/admin/login.php');
     exit;
 }
 ?>

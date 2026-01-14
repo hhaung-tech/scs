@@ -1,12 +1,16 @@
 <?php
+ini_set('display_startup_errors', 1);
+ini_set('display_errors', 1);
+error_reporting(-1);
+
 require_once '../../config/database.php';
 require_once '../../includes/auth.php';
-require_once '../../includes/analytics-common.php';
+require_once '../../includes/analytics-common-ai.php';
 requireLogin();
 
 // Set page configuration
-$currentPage = 'guardian-analytics';
-$surveyType = 'guardian';
+$currentPage = 'student-analytics';
+$surveyType = 'student';
 
 // Initialize variables
 $statistics = [];
@@ -47,7 +51,6 @@ try {
     die("An error occurred while processing the data: " . $e->getMessage());
 }
 
-require_once '../../includes/analytics-template.php';
-require_once '../../includes/footer.php'; 
+require_once '../../includes/analytics-template-ai.php';
+require_once '../../includes/footer.php';
 ?>
-

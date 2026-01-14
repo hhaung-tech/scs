@@ -3,7 +3,7 @@ require_once '../config/database.php';
 require_once '../includes/auth.php';
 requireLogin();
 require_once '../includes/header.php';
-require_once '../includes/sidebar.php';
+require_once '../includes/sidebar-dynamic.php';
 ?>
 <style>
 .box-content.text-center {

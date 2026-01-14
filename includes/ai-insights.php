@@ -10,6 +10,11 @@ function generateAIInsights($questionData, $maxTokens = 1000) {
     
     // Get OpenAI API key from environment variable or config
     $openaiApiKey = getenv('OPENAI_API_KEY') ?: 'your-openai-api-key-here';
+    
+    // If no valid API key, return mock insights for demonstration
+    if (empty($openaiApiKey) || $openaiApiKey === 'your-openai-api-key-here' || $openaiApiKey === 'replace-with-your-openai-api-key') {
+        return generateMockInsights($questionData);
+    }
 
     $prompt = buildPrompt($questionData);
 
@@ -41,14 +46,26 @@ function generateAIInsights($questionData, $maxTokens = 1000) {
 
     // Execute API call
     $response = curl_exec($ch);
+    $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+    
     if ($error = curl_error($ch)) {
         error_log("AI Insights cURL error: " . $error);
         curl_close($ch);
-        return '';
+        return "Error: Unable to connect to AI service.";
     }
 
     curl_close($ch);
+    
+    // Log response for debugging
+    error_log("OpenAI API Response (HTTP $httpCode): " . substr($response, 0, 500));
+    
     $responseData = json_decode($response, true);
+
+    // Check for API errors
+    if (isset($responseData['error'])) {
+        error_log("OpenAI API Error: " . json_encode($responseData['error']));
+        return "AI Analysis temporarily unavailable. Error: " . ($responseData['error']['message'] ?? 'Unknown error');
+    }
 
     // Extract the AI-generated answer
     if (isset($responseData['choices'][0]['message']['content'])) {
@@ -56,7 +73,8 @@ function generateAIInsights($questionData, $maxTokens = 1000) {
     }
 
     // Fallback if no content returned
-    return '';
+    error_log("No content in OpenAI response: " . json_encode($responseData));
+    return "AI Analysis: No insights generated for this data.";
 }
 
 /**
@@ -102,5 +120,35 @@ Please provide a detailed analysis of the survey responses, including the follow
 EOT;
 
     return $prompt;
+}
+
+/**
+ * Generate mock AI insights for demonstration when no valid API key is available
+ */
+function generateMockInsights($questionData) {
+    $questionText = $questionData['question'] ?? 'Survey Question';
+    $questionType = $questionData['type'] ?? 'unknown';
+    $answers = $questionData['answers'] ?? [];
+    
+    $insights = "🤖 **AI Analysis Preview** (Demo Mode)\n\n";
+    
+    if ($questionType === 'text') {
+        $responseCount = count($answers);
+        $insights .= "**Key Insights:**\n";
+        $insights .= "• Analyzed {$responseCount} text responses\n";
+        $insights .= "• Common themes identified in feedback\n";
+        $insights .= "• Sentiment appears generally positive\n";
+        $insights .= "• Recommendations: Focus on addressing recurring concerns\n\n";
+        $insights .= "*Note: This is a demo. Connect your OpenAI API key for real AI analysis.*";
+    } else {
+        $insights .= "**Survey Response Analysis:**\n";
+        $insights .= "• Response patterns show clear preferences\n";
+        $insights .= "• Data suggests areas for improvement\n";
+        $insights .= "• Trends indicate positive engagement\n";
+        $insights .= "• Actionable insights available for decision-making\n\n";
+        $insights .= "*Note: This is a demo. Connect your OpenAI API key for detailed AI insights.*";
+    }
+    
+    return $insights;
 }
 ?>

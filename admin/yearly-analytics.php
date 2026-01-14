@@ -78,7 +78,7 @@ if (isset($_GET['year1']) && isset($_GET['year2']) && isset($_GET['type'])) {
 }
 
 require_once '../includes/header.php';
-require_once '../includes/sidebar.php';
+require_once '../includes/sidebar-dynamic.php';
 ?>
 
 <style>
