@@ -21,18 +21,18 @@ try {
 <div class="wrapper">
     <div class="main-menu">
         <header class="header">
-        <a href="/isy_scs_ai/admin/index.php" class="logo">School Climate Survey</a>
+        <a href="<?php echo basePath('admin/index.php'); ?>" class="logo">School Climate Survey</a>
         <button
             type="button"
             class="button-close fa fa-times js__menu_close"
         ></button>
         <div class="user">
             <a href="#" class="avatar">
-                <img src="/isy_scs_ai/assets/images/user.png" alt="User Avatar">
+                <img src="<?php echo basePath('assets/images/user.png'); ?>" alt="User Avatar">
                 <span class="status online"></span>
             </a>
             <h5 class="name">
-                    <a href="/isy_scs_ai/admin/profile.php">
+                    <a href="<?php echo basePath('admin/profile.php'); ?>">
                         <?php echo isset($_SESSION['admin_name']) ? htmlspecialchars($_SESSION['admin_name']) : 'Administrator'; ?>
                     </a>
                 </h5>
@@ -47,7 +47,7 @@ try {
             <!-- /.title -->
             <ul class="menu js__accordion">
                 <li class="current">
-                    <a class="waves-effect" href="/isy_scs_ai/admin/index.php"
+                    <a class="waves-effect" href="<?php echo basePath('admin/index.php'); ?>"
                     ><i class="menu-icon fa fa-home"></i><span>Dashboard</span></a
                     >
                 </li>
@@ -62,7 +62,7 @@ try {
                     <ul class="sub-menu js__content">
                         <?php foreach ($activeSurveys as $survey): ?>
                         <li>
-                            <a href="/isy_scs_ai/admin/<?php echo $survey['survey_type']; ?>/questions.php">
+                            <a href="<?php echo basePath('admin/' . $survey['survey_type'] . '/questions.php'); ?>">
                                 <?php echo htmlspecialchars($survey['display_name']); ?>
                             </a>
                         </li>
@@ -82,7 +82,7 @@ try {
                     <ul class="sub-menu js__content">
                     <?php foreach ($activeSurveys as $survey): ?>
                         <li>
-                            <a href="/isy_scs_ai/admin/<?php echo $survey['survey_type']; ?>/analytics.php">
+                            <a href="<?php echo basePath('admin/' . $survey['survey_type'] . '/analytics.php'); ?>">
                                 <?php echo htmlspecialchars($survey['display_name']); ?> Analytics
                             </a>
                         </li>
@@ -99,7 +99,7 @@ try {
                     <ul class="sub-menu js__content">
                     <?php foreach ($activeSurveys as $survey): ?>
                         <li>
-                            <a href="/isy_scs_ai/admin/<?php echo $survey['survey_type']; ?>/analytics-ai.php">
+                            <a href="<?php echo basePath('admin/' . $survey['survey_type'] . '/analytics-ai.php'); ?>">
                                 AI <?php echo htmlspecialchars($survey['display_name']); ?> Insights
                             </a>
                         </li>
@@ -115,7 +115,7 @@ try {
                     ></a>
                     <ul class="sub-menu js__content">
                     <li>
-                        <a href="/isy_scs_ai/admin/yearly-analytics.php">Comparison Report</a>
+                        <a href="<?php echo basePath('admin/yearly-analytics.php'); ?>">Comparison Report</a>
                     </li>
                     </ul>
                     <!-- /.sub-menu js__content -->
@@ -128,7 +128,7 @@ try {
                     ></a>
                     <ul class="sub-menu js__content">
                     <li>
-                        <a href="/isy_scs_ai/admin/survey-code.php">Survey Code</a>
+                        <a href="<?php echo basePath('admin/survey-code.php'); ?>">Survey Code</a>
                     </li>
                     </ul>
                     <!-- /.sub-menu js__content -->
@@ -141,8 +141,8 @@ try {
                     ><span class="menu-arrow fa fa-angle-down"></span
                     ></a>
                     <ul class="sub-menu js__content">
-                        <li><a href="/isy_scs_ai/admin/manage-questions-modern.php">Question Manager</a></li>
-                        <li><a href="/isy_scs_ai/admin/survey-settings.php">Survey Settings</a></li>
+                        <li><a href="<?php echo basePath('admin/manage-questions-modern.php'); ?>">Question Manager</a></li>
+                        <li><a href="<?php echo basePath('admin/survey-settings.php'); ?>">Survey Settings</a></li>
                     </ul>
                 </li>
                 
@@ -153,10 +153,10 @@ try {
                     ></a>
                     <ul class="sub-menu js__content">
                     <li>
-                        <a href="/isy_scs_ai/admin/users.php">Admin Users</a>
+                        <a href="<?php echo basePath('admin/users.php'); ?>">Admin Users</a>
                     </li>
                     <li>
-                        <a href="/isy_scs_ai/admin/profile.php">Profile</a>
+                        <a href="<?php echo basePath('admin/profile.php'); ?>">Profile</a>
                     </li>
                     </ul>
                     <!-- /.sub-menu js__content -->
@@ -180,7 +180,7 @@ try {
         </div>
         <!-- /.pull-left -->
         <div class="pull-right">
-            <a href="/isy_scs_ai/admin/logout.php" class="ico-item fa fa-power-off"></a>
+            <a href="<?php echo basePath('admin/logout.php'); ?>" class="ico-item fa fa-power-off"></a>
         </div>
     </div>  <!-- /.pull-right -->
 </div>

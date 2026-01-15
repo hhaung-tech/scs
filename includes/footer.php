@@ -1,27 +1,27 @@
     <!-- Core JavaScript (Must load first) -->
-    <script src="/isy_scs_ai/assets/scripts/jquery.min.js"></script>
-    <script src="/isy_scs_ai/assets/plugin/bootstrap/js/bootstrap.min.js"></script>
-    <script src="/isy_scs_ai/assets/scripts/modernizr.min.js"></script>
+    <script src="<?php echo basePath('assets/scripts/jquery.min.js'); ?>"></script>
+    <script src="<?php echo basePath('assets/plugin/bootstrap/js/bootstrap.min.js'); ?>"></script>
+    <script src="<?php echo basePath('assets/scripts/modernizr.min.js'); ?>"></script>
     
     <!-- Highcharts -->
-    <script src="/isy_scs_ai/assets/plugin/chart/highcharts/highcharts.js"></script>
-    <script src="/isy_scs_ai/assets/plugin/chart/highcharts/highcharts-3d.js"></script>
-    <script src="/isy_scs_ai/assets/plugin/chart/highcharts/themes/grid-light.js"></script>
+    <script src="<?php echo basePath('assets/plugin/chart/highcharts/highcharts.js'); ?>"></script>
+    <script src="<?php echo basePath('assets/plugin/chart/highcharts/highcharts-3d.js'); ?>"></script>
+    <script src="<?php echo basePath('assets/plugin/chart/highcharts/themes/grid-light.js'); ?>"></script>
     
     <!-- Plugins -->
-    <script src="/isy_scs_ai/assets/plugin/nprogress/nprogress.js"></script>
-    <script src="/isy_scs_ai/assets/plugin/mCustomScrollbar/jquery.mCustomScrollbar.concat.min.js"></script>
-    <script src="/isy_scs_ai/assets/plugin/fullscreen/jquery.fullscreen-min.js"></script>
-    <script src="/isy_scs_ai/assets/plugin/waves/waves.min.js"></script>
-    <script src="/isy_scs_ai/assets/plugin/moment/moment.js"></script>
-    <script src="/isy_scs_ai/assets/plugin/percircle/js/percircle.js"></script>
+    <script src="<?php echo basePath('assets/plugin/nprogress/nprogress.js'); ?>"></script>
+    <script src="<?php echo basePath('assets/plugin/mCustomScrollbar/jquery.mCustomScrollbar.concat.min.js'); ?>"></script>
+    <script src="<?php echo basePath('assets/plugin/fullscreen/jquery.fullscreen-min.js'); ?>"></script>
+    <script src="<?php echo basePath('assets/plugin/waves/waves.min.js'); ?>"></script>
+    <script src="<?php echo basePath('assets/plugin/moment/moment.js'); ?>"></script>
+    <script src="<?php echo basePath('assets/plugin/percircle/js/percircle.js'); ?>"></script>
     
     <!-- Custom Scripts (Load after plugins) -->
-    <script src="/isy_scs_ai/assets/scripts/main.min.js"></script>
+    <script src="<?php echo basePath('assets/scripts/main.min.js'); ?>"></script>
     <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.14.0/Sortable.min.js"></script>
-    <script src="/isy_scs_ai/assets/scripts/chart.highcharts.init.min.js"></script>
-    <script src="/isy_scs_ai/assets/scripts/scs/charts.js"></script>
-    <script src="/isy_scs_ai/assets/scripts/scs/questions.js"></script>
+    <script src="<?php echo basePath('assets/scripts/chart.highcharts.init.min.js'); ?>"></script>
+    <script src="<?php echo basePath('assets/scripts/scs/charts.js'); ?>"></script>
+    <script src="<?php echo basePath('assets/scripts/scs/questions.js'); ?>"></script>
     
     <!-- Export Scripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
@@ -38,22 +38,22 @@
     ?>
     <?php if (strpos($currentPage, 'analytics') !== false): ?>
         <?php if ($currentPage === 'yearly-analytics'): ?>
-            <script src="/isy_scs_ai/assets/scripts/scs/yearly-export.js"></script>
+            <script src="<?php echo basePath('assets/scripts/scs/yearly-export.js'); ?>"></script>
         <?php else: ?>
-            <script src="/isy_scs_ai/assets/scripts/scs/export.js"></script>
+            <script src="<?php echo basePath('assets/scripts/scs/export.js'); ?>"></script>
         <?php endif; ?>
     <?php endif; ?>
     
-    <script src="/isy_scs_ai/assets/scripts/scs/yearly-charts.js"></script>
+    <script src="<?php echo basePath('assets/scripts/scs/yearly-charts.js'); ?>"></script>
     <?php if (isset($currentPage)): ?>
         <?php if ($currentPage === 'yearly-analytics'): ?>
-            <script src="/isy_scs_ai/assets/scripts/scs/yearly-export.js"></script>
+            <script src="<?php echo basePath('assets/scripts/scs/yearly-export.js'); ?>"></script>
         <?php elseif (strpos($currentPage, '-analytics') !== false): ?>
-            <script src="/isy_scs_ai/assets/scripts/scs/export.js"></script>
+            <script src="<?php echo basePath('assets/scripts/scs/export.js'); ?>"></script>
         <?php endif; ?>
     <?php endif; ?>
     
-    <script src="/isy_scs_ai/assets/scripts/scs/yearly-charts.js"></script>
+    <script src="<?php echo basePath('assets/scripts/scs/yearly-charts.js'); ?>"></script>
     
     <!-- Export button handlers -->
     <!-- <script>

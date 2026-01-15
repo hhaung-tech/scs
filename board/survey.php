@@ -57,7 +57,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['answers'])) {
         handleSurveySubmission($pdo, $_POST['answers']);
         unset($_SESSION['survey_code']);
         unset($_SESSION['authenticated_board']);
-        header("Location: /isy_scs_ai/thank-you.php");
+        header("Location: " . basePath('thank-you.php'));
         exit;
     } catch (Exception $e) {
         http_response_code(500);

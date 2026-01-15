@@ -64,7 +64,11 @@ function requireLogin() {
         header("Cache-Control: no-cache, no-store, must-revalidate");
         header("Pragma: no-cache");
         header("Expires: 0");
-        header('Location: /isy_scs_ai/admin/login.php');
+        $scriptName = $_SERVER['SCRIPT_NAME'] ?? '';
+        $pos = strpos($scriptName, '/admin/');
+        $base = $pos !== false ? substr($scriptName, 0, $pos) : '';
+        $base = rtrim($base, '/');
+        header('Location: ' . $base . '/admin/login.php');
         exit;
     }
 }
@@ -82,7 +86,11 @@ function logout() {
     header("Cache-Control: no-cache, no-store, must-revalidate");
     header("Pragma: no-cache");
     header("Expires: 0");
-    header('Location: /isy_scs_ai/admin/login.php');
+    $scriptName = $_SERVER['SCRIPT_NAME'] ?? '';
+    $pos = strpos($scriptName, '/admin/');
+    $base = $pos !== false ? substr($scriptName, 0, $pos) : '';
+    $base = rtrim($base, '/');
+    header('Location: ' . $base . '/admin/login.php');
     exit;
 }
 ?>

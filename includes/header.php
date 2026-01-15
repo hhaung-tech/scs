@@ -1,9 +1,39 @@
 <?php
 // Helper function to determine base path if needed, adjust if your paths are absolute
 function basePath($path = '') {
-    // Simple example, adjust based on your actual URL structure or config
-    $base = rtrim('/isy_scs_ai', '/'); // Assuming this is your base web path
-    return $base . '/' . ltrim($path, '/');
+    $base = getenv('APP_BASE_PATH');
+    if ($base === false || trim((string)$base) === '') {
+        $scriptName = $_SERVER['SCRIPT_NAME'] ?? '';
+        $knownSegments = [
+            '/admin/',
+            '/student/',
+            '/guardian/',
+            '/staff/',
+            '/board/',
+            '/alumni/',
+            '/assets/',
+            '/includes/',
+            '/config/',
+        ];
+
+        $base = '';
+        foreach ($knownSegments as $seg) {
+            $pos = strpos($scriptName, $seg);
+            if ($pos !== false) {
+                $base = substr($scriptName, 0, $pos);
+                break;
+            }
+        }
+
+        if ($base === '') {
+            $dir = rtrim(str_replace('\\', '/', dirname($scriptName)), '/');
+            $base = $dir === '' || $dir === '.' ? '' : $dir;
+        }
+    }
+    $base = trim((string)$base);
+    $base = $base === '' ? '' : '/' . trim($base, '/');
+    $path = ltrim((string)$path, '/');
+    return $base . '/' . $path;
 }
 ?>
 <!DOCTYPE html>
@@ -17,28 +47,28 @@ function basePath($path = '') {
 
     <title>School Climate Survey</title>
     <link rel="icon" type="image/x-icon" href="<?php echo basePath('assets/images/isy_logo.png'); ?>">
-    <link rel="stylesheet" href="/isy_scs_ai/assets/styles/style.min.css">
+    <link rel="stylesheet" href="<?php echo basePath('assets/styles/style.min.css'); ?>">
     <!-- Main Styles -->
     <!-- mCustomScrollbar -->
-    <link rel="stylesheet" href="/isy_scs_ai/assets/plugin/mCustomScrollbar/jquery.mCustomScrollbar.min.css" />
+    <link rel="stylesheet" href="<?php echo basePath('assets/plugin/mCustomScrollbar/jquery.mCustomScrollbar.min.css'); ?>" />
 
     <!-- Waves Effect -->
-    <link rel="stylesheet" href="/isy_scs_ai/assets/plugin/waves/waves.min.css" />
+    <link rel="stylesheet" href="<?php echo basePath('assets/plugin/waves/waves.min.css'); ?>" />
 
     <!-- Sweet Alert -->
-    <link rel="stylesheet" href="/isy_scs_ai/assets/plugin/sweet-alert/sweetalert.css" />
+    <link rel="stylesheet" href="<?php echo basePath('assets/plugin/sweet-alert/sweetalert.css'); ?>" />
 
     <!-- Percent Circle -->
-    <link rel="stylesheet" href="/isy_scs_ai/assets/plugin/percircle/css/percircle.css" />
+    <link rel="stylesheet" href="<?php echo basePath('assets/plugin/percircle/css/percircle.css'); ?>" />
 
     <!-- Chartist Chart -->
-    <link rel="stylesheet" href="/isy_scs_ai/assets/plugin/chart/chartist/chartist.min.css" />
+    <link rel="stylesheet" href="<?php echo basePath('assets/plugin/chart/chartist/chartist.min.css'); ?>" />
 
     <!-- FullCalendar -->
-    <link rel="stylesheet" href="/isy_scs_ai/assets/plugin/fullcalendar/fullcalendar.min.css" />
-    <link rel="stylesheet" href="/isy_scs_ai/assets/plugin/fullcalendar/fullcalendar.print.css" media="print" />
+    <link rel="stylesheet" href="<?php echo basePath('assets/plugin/fullcalendar/fullcalendar.min.css'); ?>" />
+    <link rel="stylesheet" href="<?php echo basePath('assets/plugin/fullcalendar/fullcalendar.print.css'); ?>" media="print" />
     <!-- Dark Themes -->
-    <link rel="stylesheet" href="/isy_scs_ai/assets/styles/style-dark.min.css" />
+    <link rel="stylesheet" href="<?php echo basePath('assets/styles/style-dark.min.css'); ?>" />
     <?php
     if (isset($_SERVER['REQUEST_URI']) && strpos($_SERVER['REQUEST_URI'], '/admin/') !== false) {
         echo '<link rel="stylesheet" href="' . basePath('assets/styles/isy-admin-theme.css') . '" />';

@@ -209,10 +209,10 @@ require_once '../includes/sidebar-dynamic.php';
 ?>
 
 <!-- Include responsive fixes for production -->
-<link rel="stylesheet" href="/isy_scs_ai/assets/styles/responsive-fixes.css">
+<link rel="stylesheet" href="<?php echo basePath('assets/styles/responsive-fixes.css'); ?>">
 
 <!-- ISY admin theme (navy + gold) -->
-<link rel="stylesheet" href="/isy_scs_ai/assets/styles/isy-admin-theme.css">
+<link rel="stylesheet" href="<?php echo basePath('assets/styles/isy-admin-theme.css'); ?>">
 
 <style>
 .modern-container {

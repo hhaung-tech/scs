@@ -6,7 +6,7 @@
         <h1>Thank You!</h1>
         <p>Your survey response has been successfully recorded.</p>
         <p>You will be redirected to the home page in <span id="countdown">10</span> seconds.</p>
-        <a href="/isy_scs_ai/" class="home-button">Return to Home</a>
+        <a href="<?php echo basePath(''); ?>" class="home-button">Return to Home</a>
     </div>
 </div>
 
@@ -61,7 +61,7 @@ const interval = setInterval(() => {
     countdownElement.textContent = seconds;
     if (seconds <= 0) {
         clearInterval(interval);
-        window.location.href = '/isy_scs_ai/';
+        window.location.href = '<?php echo basePath(''); ?>';
     }
 }, 1000);
 </script>

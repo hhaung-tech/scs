@@ -1,7 +1,15 @@
 <?php
 // Redirect to new modern Question Manager
 $type = isset($_GET['type']) ? trim((string)$_GET['type']) : '';
-header('Location: /isy_scs_ai/admin/manage-questions-modern.php' . ($type !== '' ? '?type=' . urlencode($type) : ''));
+
+// Minimal base path detection (do NOT include header.php because it outputs HTML)
+$scriptName = $_SERVER['SCRIPT_NAME'] ?? '';
+$pos = strpos($scriptName, '/admin/');
+$base = $pos !== false ? substr($scriptName, 0, $pos) : '';
+$base = rtrim($base, '/');
+
+$location = $base . '/admin/manage-questions-modern.php' . ($type !== '' ? '?type=' . urlencode($type) : '');
+header('Location: ' . $location);
 exit;
 ?>
 

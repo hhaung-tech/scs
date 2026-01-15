@@ -28,7 +28,7 @@ require_once '../includes/sidebar-dynamic.php';
 ?>
 
 <!-- ISY admin theme (navy + gold) -->
-<link rel="stylesheet" href="/isy_scs_ai/assets/styles/isy-admin-theme.css">
+<link rel="stylesheet" href="<?php echo basePath('assets/styles/isy-admin-theme.css'); ?>">
 
 <div class="wrapper">
 <div class="main-content">

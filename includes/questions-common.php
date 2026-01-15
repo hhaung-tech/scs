@@ -318,7 +318,7 @@ require_once '../../includes/sidebar-dynamic.php';
                     <div class="alert alert-info">
                         <i class="fa fa-info-circle"></i> 
                         Manage sections and questions using the <strong>Question Manager</strong>.
-                        <a href="/isy_scs_ai/admin/manage-questions-modern.php" class="btn btn-sm btn-primary pull-right">
+                        <a href="<?php echo basePath('admin/manage-questions-modern.php'); ?>" class="btn btn-sm btn-primary pull-right">
                             <i class="fa fa-list"></i> Open Question Manager
                         </a>
                         <div class="clearfix"></div>

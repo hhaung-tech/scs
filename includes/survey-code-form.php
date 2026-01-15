@@ -60,7 +60,7 @@
 <div class="survey-code-page">
     <div class="survey-code-card">
         <div class="survey-code-header">
-            <img src="/isy_scs_ai/assets/images/isy_logo.png" alt="ISY Logo" class="survey-code-logo">
+            <img src="<?php echo basePath('assets/images/isy_logo.png'); ?>" alt="ISY Logo" class="survey-code-logo">
             <h4 class="survey-code-title"><?php echo ucfirst($surveyType); ?> Survey Access</h4>
             <p class="survey-code-subtitle">Enter your access code to start the survey.</p>
         </div>
