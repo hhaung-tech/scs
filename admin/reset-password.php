@@ -1,5 +1,5 @@
 <?php
-require_once '../config/database.php';
+require_once __DIR__ . '/../config/database.php';
 
 $message = '';
 $error = '';
@@ -61,7 +61,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && $validToken) {
     }
 }
 
-require_once '../includes/header.php'; 
+require_once __DIR__ . '/../includes/header.php';
 ?>
 <div id="single-wrapper">
     <form action="" method="POST" class="frm-single">
@@ -99,4 +99,4 @@ require_once '../includes/header.php';
     </form>
 </div>
 
-<?php require_once '../includes/footer.php'; ?>
+<?php require_once __DIR__ . '/../includes/footer.php'; ?>

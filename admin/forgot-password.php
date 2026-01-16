@@ -1,5 +1,5 @@
 <?php
-require_once '../config/database.php';
+require_once __DIR__ . '/../config/database.php';
 
 $message = '';
 $error = '';
@@ -35,7 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $result = $updateStmt->execute([$token, $expiry, $email]);
             
             if ($result) {
-                $resetLink = "http://{$_SERVER['HTTP_HOST']}/isy_scs_ai/admin/reset-password.php?token=" . $token;
+                $resetLink = "http://{$_SERVER['HTTP_HOST']}/admin/reset-password.php?token=" . $token;
                 
                 // In a real application, you would send an email here
                 // For now, we'll just show the reset link for testing
@@ -54,8 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $error = "An error occurred. Please try again later.";
     }
 }
-require_once '../includes/header.php'; 
-require_once '../includes/footer.php';
+require_once __DIR__ . '/../includes/header.php';
 ?>
 
 <div id="single-wrapper">
@@ -84,9 +83,9 @@ require_once '../includes/footer.php';
 
             <button type="submit" class="frm-submit">Send Email<i class="fa fa-arrow-circle-right"></i></button>
             <a href="login.php" class="a-link"><i class="fa fa-sign-in"></i>Back to Login</a>
-            <div class="frm-footer">ISY School Climate Survey © <?php echo date('Y'); ?></div>
+            <div class="frm-footer">ISY School Climate Survey &copy; <?php echo date('Y'); ?></div>
         </div>
     </form>
 </div>
 
-<?php require_once '../includes/footer.php'; ?>
+<?php require_once __DIR__ . '/../includes/footer.php'; ?>

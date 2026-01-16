@@ -1,6 +1,6 @@
 <?php
-require_once '../config/database.php';
-require_once '../includes/auth.php';
+require_once __DIR__ . '/../config/database.php';
+require_once __DIR__ . '/../includes/auth.php';
 
 // Redirect if already logged in
 if (isLoggedIn()) {
@@ -26,7 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $error = 'An error occurred. Please try again.';
     }
 }
-include('../includes/header.php');
+require_once __DIR__ . '/../includes/header.php';
 ?>
 
 <div id="single-wrapper">
@@ -71,4 +71,4 @@ include('../includes/header.php');
 }
 </style>
 
-<?php include('../includes/footer.php'); ?>
+<?php require_once __DIR__ . '/../includes/footer.php'; ?>

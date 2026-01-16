@@ -13,19 +13,21 @@ function basePath($path = '') {
             '/alumni/',
             '/assets/',
             '/includes/',
-            '/config/',
+            '/config/',                                                                                                                                 
         ];
 
         $base = '';
+        $matchedKnownSegment = false;
         foreach ($knownSegments as $seg) {
             $pos = strpos($scriptName, $seg);
             if ($pos !== false) {
+                $matchedKnownSegment = true;
                 $base = substr($scriptName, 0, $pos);
                 break;
             }
         }
 
-        if ($base === '') {
+        if (!$matchedKnownSegment) {
             $dir = rtrim(str_replace('\\', '/', dirname($scriptName)), '/');
             $base = $dir === '' || $dir === '.' ? '' : $dir;
         }
